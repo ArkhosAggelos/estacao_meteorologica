@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Estação Meteorológica</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 font-sans">
+  <div class="max-w-4xl mx-auto p-4">
+    <h1 class="text-2xl font-bold text-center mb-4">Estação Meteorológica</h1>
+    <div class="flex justify-center gap-4 mb-6">
+      <button onclick="abrirAba('tempo-real')" class="aba-btn">Tempo Real</button>
+      <button onclick="abrirAba('dados-hora')" class="aba-btn">Por Hora</button>
+      <button onclick="abrirAba('resumo-diario')" class="aba-btn">Resumo Diário</button>
+    </div>
+    <div id="tempo-real" class="aba">
+      <h2 class="text-xl font-semibold mb-2">Leitura Atual</h2>
+      <div id="card-tempo-real" class="grid grid-cols-2 gap-4"></div>
+    </div>
+    <div id="dados-hora" class="aba hidden">
+      <h2 class="text-xl font-semibold mb-2">Dados de Ontem</h2>
+      <div id="grafico-hora"></div>
+    </div>
+    <div id="resumo-diario" class="aba hidden">
+      <h2 class="text-xl font-semibold mb-2">Últimos 30 dias</h2>
+      <div id="grafico-diario"></div>
+    </div>
+  </div>
+  <script>
+    function abrirAba(id) {
+      document.querySelectorAll('.aba').forEach(div => div.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+  </script>
+  <style>
+    .aba-btn {
+      padding: 0.5rem 1rem;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 0.5rem;
+    }
+    .aba-btn:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</body>
+</html>
