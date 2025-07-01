@@ -16,8 +16,7 @@
   "crons": [
     {
       "path": "/api/listener",
-      "schedule": "*/5 * * * *"  // a cada 5 minutos
+      "schedule": "*/5 * * * *"
     }
   ]
 }
-
