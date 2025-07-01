@@ -1,1 +1,23 @@
+{
+  "version": 2,
+  "functions": {
+    "api/listener.js": {
+      "memory": 512,
+      "maxDuration": 10,
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/listener",
+      "dest": "/api/listener.js"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/listener",
+      "schedule": "*/5 * * * *"  // a cada 5 minutos
+    }
+  ]
+}
 
