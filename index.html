@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Última Leitura - Estação Meteorológica</title>
+</head>
+<body>
+  <h2>📡 Última Leitura Registrada</h2>
+  <div id="dados">
+    <p>Carregando...</p>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://ajaptxoxyrqyqaorkisl.supabase.co';
+    const API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqYXB0eG94eXJxeXFhb3JraXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5NDg3MjUsImV4cCI6MjA1OTUyNDcyNX0.EUqY36QI7ey3cVBAHZsG4x4oTSPP2Etyxc7xY4I7v-0';
+
+    async function carregarDados() {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/leituras?select=*&order=id.desc&limit=1`, {
+        headers: {
+          apikey: API_KEY,
+          Authorization: `Bearer ${API_KEY}`,
+        }
+      });
+
+      const data = await res.json();
+
+      if (data.length === 0) {
+        document.getElementById('dados').innerHTML = '<p>Sem dados disponíveis.</p>';
+        return;
+      }
+
+      const leitura = data[0];
+      document.getElementById('dados').innerHTML = `
+        <ul>
+          <li><strong>🕒 Data/Hora:</strong> ${leitura.id}</li>
+          <li><strong>🌡 Temperatura:</strong> ${leitura.temperatura} °C</li>
+          <li><strong>💧 Umidade:</strong> ${leitura.umidade} %</li>
+          <li><strong>📈 Pressão:</strong> ${leitura.pressao} hPa</li>
+          <li><strong>💡 Luminosidade:</strong> ${leitura.lux}</li>
+          <li><strong>🌦 Previsão:</strong> ${leitura.previsao}</li>
+        </ul>
+      `;
+    }
+
+    carregarDados();
+  </script>
+</body>
+</html>
