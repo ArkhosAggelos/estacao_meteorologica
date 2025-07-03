@@ -1,48 +1,95 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Última Leitura - Estação Meteorológica</title>
+  <title>Estação Meteorológica - Leituras</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { margin-top: 40px; }
+    canvas { max-width: 100%; }
+    .grafico-container { margin-bottom: 40px; }
+  </style>
 </head>
 <body>
-  <h2>📡 Última Leitura Registrada</h2>
-  <div id="dados">
-    <p>Carregando...</p>
-  </div>
+
+  <h1>📡 Última Leitura Registrada</h1>
+  <div id="dados"></div>
+
+  <h2>📈 Gráficos das Últimas 24h</h2>
+  <div class="grafico-container"><canvas id="graficoTemperatura"></canvas></div>
+  <div class="grafico-container"><canvas id="graficoUmidade"></canvas></div>
+  <div class="grafico-container"><canvas id="graficoPressao"></canvas></div>
+  <div class="grafico-container"><canvas id="graficoLuminosidade"></canvas></div>
 
   <script>
-    const SUPABASE_URL = 'https://ajaptxoxyrqyqaorkisl.supabase.co';
-    const API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqYXB0eG94eXJxeXFhb3JraXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5NDg3MjUsImV4cCI6MjA1OTUyNDcyNX0.EUqY36QI7ey3cVBAHZsG4x4oTSPP2Etyxc7xY4I7v-0';
+    const supabase = supabase.createClient(
+      'https://ajaptxoxyrqyqaorkisl.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqYXB0eG94eXJxeXFhb3JraXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5NDg3MjUsImV4cCI6MjA1OTUyNDcyNX0.EUqY36QI7ey3cVBAHZsG4x4oTSPP2Etyxc7xY4I7v-0'
+    );
 
     async function carregarDados() {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/leituras?select=*&order=id.desc.nullslast&limit=1`, {
-        headers: {
-          apikey: API_KEY,
-          Authorization: `Bearer ${API_KEY}`,
-        }
-      });
+      const agora = new Date();
+      const ontem = new Date(agora.getTime() - 24 * 60 * 60 * 1000).toISOString();
 
-      const data = await res.json();
+      const { data, error } = await supabase
+        .from("leituras")
+        .select("*")
+        .gte("id", ontem)
+        .order("id", { ascending: true });
 
-      if (data.length === 0) {
-        document.getElementById('dados').innerHTML = '<p>Sem dados disponíveis.</p>';
+      if (error || !data.length) {
+        document.getElementById("dados").innerHTML = "<p>Sem dados disponíveis.</p>";
         return;
       }
 
-      const leitura = data[0];
-      document.getElementById('dados').innerHTML = `
-        <ul>
-          <li><strong>🕒 Data/Hora:</strong> ${leitura.id}</li>
-          <li><strong>🌡 Temperatura:</strong> ${leitura.temperatura} °C</li>
-          <li><strong>💧 Umidade:</strong> ${leitura.umidade} %</li>
-          <li><strong>📈 Pressão:</strong> ${leitura.pressao} hPa</li>
-          <li><strong>💡 Luminosidade:</strong> ${leitura.lux}</li>
-          <li><strong>🌦 Previsão:</strong> ${leitura.previsao}</li>
-        </ul>
+      const ultima = data[data.length - 1];
+      document.getElementById("dados").innerHTML = `
+        <p>🕒 <b>Data/Hora:</b> ${ultima.id}</p>
+        <p>🌡️ <b>Temperatura:</b> ${ultima.temperatura} °C</p>
+        <p>💧 <b>Umidade:</b> ${ultima.umidade} %</p>
+        <p>🧭 <b>Pressão:</b> ${ultima.pressao} hPa</p>
+        <p>💡 <b>Luminosidade:</b> ${ultima.lux}</p>
+        <p>☂️ <b>Previsão:</b> ${ultima.previsao}</p>
       `;
+
+      const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR"));
+      const temperatura = data.map(d => d.temperatura);
+      const umidade = data.map(d => d.umidade);
+      const pressao = data.map(d => d.pressao);
+      const lux = data.map(d => d.lux);
+
+      criarGrafico("graficoTemperatura", "Temperatura (°C)", labels, temperatura, "red");
+      criarGrafico("graficoUmidade", "Umidade (%)", labels, umidade, "blue");
+      criarGrafico("graficoPressao", "Pressão (hPa)", labels, pressao, "purple");
+      criarGrafico("graficoLuminosidade", "Luminosidade (lux)", labels, lux, "orange");
+    }
+
+    function criarGrafico(id, label, labels, dados, cor) {
+      new Chart(document.getElementById(id), {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: label,
+            data: dados,
+            borderColor: cor,
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: { display: true, title: { display: true, text: "Hora" } },
+            y: { beginAtZero: false }
+          }
+        }
+      });
     }
 
     carregarDados();
   </script>
+
 </body>
 </html>
