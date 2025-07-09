@@ -31,9 +31,7 @@ Este projeto consiste em uma estação meteorológica compacta, baseada no micro
 
 ## 👨‍💻 Autor
 
-**&copy;2025 ArkhosAggelos**
-
-
+**&copy;2025 ArkhosAggelos**<br>
 **Claudio Roberto da Silva**  
 Projeto didático para fins educacionais, experimentação com IoT e monitoramento ambiental.
 
