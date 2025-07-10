@@ -1,0 +1,57 @@
+
+body {
+  font-family: sans-serif;
+  background: #f3f4f6;
+  margin: 0;
+  padding: 20px;
+}
+.container {
+  max-width: 960px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.tabs button {
+  background: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  clip-path: polygon(0 100%, 5% 0, 95% 0, 100% 100%);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.tabs button.ativo {
+  background: #3b82f6;
+  color: white;
+}
+.aba {
+  display: none;
+}
+.aba.ativa {
+  display: block;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+.card {
+  background: #e0f2fe;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 16px;
+}
+.card-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+canvas {
+  max-width: 100%;
+  margin: 20px 0;
+}
