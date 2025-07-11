@@ -86,6 +86,34 @@ function carregarGraficoHora() {
     });
 }
 
+function carregarGraficoHoraTemperatura() {
+  fetch(urlHora, { headers })
+    .then(res => res.json())
+    .then(data => {
+      const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit' }));
+      const temperatura = data.map(d => d.temperatura_avg);
+
+      new Chart(document.getElementById("grafico-hora-temperatura"), {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Temperatura (°C)",
+              data: temperatura,
+              borderColor: "blue",
+              fill: false,
+              tension: 0.3
+            },
+          ]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    });
+}
+
 function carregarGraficoDia() {
   fetch(urlDia, { headers })
     .then(res => res.json())
