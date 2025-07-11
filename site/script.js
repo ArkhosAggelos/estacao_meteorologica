@@ -142,6 +142,62 @@ function carregarGraficoHoraUmidade() {
     });
 }
 
+function carregarGraficoHoraPressao() {
+  fetch(urlHora, { headers })
+    .then(res => res.json())
+    .then(data => {
+      const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit' }));
+      const pressao = data.map(d => d.pressao_avg);
+
+      new Chart(document.getElementById("grafico-hora-pressao"), {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Pressão (hPa)",
+              data: pressao,
+              borderColor: "gray",
+              fill: false,
+              tension: 0.3
+            },
+          ]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    });
+}
+
+function carregarGraficoHoraLux() {
+  fetch(urlHora, { headers })
+    .then(res => res.json())
+    .then(data => {
+      const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit' }));
+      const lux = data.map(d => d.lux_avg);
+
+      new Chart(document.getElementById("grafico-hora-lux"), {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Luminosidade (lx)",
+              data: lux,
+              borderColor: "orange",
+              fill: false,
+              tension: 0.3
+            }
+          ]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    });
+}
+
 function carregarGraficoDia() {
   fetch(urlDia, { headers })
     .then(res => res.json())
@@ -198,5 +254,7 @@ carregarTempoReal();
 carregarGraficoHora();
 carregarGraficoHoraTemperatura();
 carregarGraficoHoraUmidade();
+carregarGraficoHoraPressao();
+carregarGraficoHoraLux();
 carregarGraficoDia();
 setInterval(carregarTempoReal, 300000); // 5 minutos
