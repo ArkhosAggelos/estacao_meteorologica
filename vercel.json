@@ -13,10 +13,4 @@
       "dest": "/api/listener.js"
     }
   ],
-  "crons": [
-    {
-      "path": "/api/listener",
-      "schedule": "*/5 * * * *"
-    }
-  ]
 }
