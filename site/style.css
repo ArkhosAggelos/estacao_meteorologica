@@ -36,11 +36,12 @@ h1 {
   top: 2px;
 }
 .tabs button:hover {
-  background: #d1d5db;
+  background: #000000;
+  color: white;
 }
 .tabs button.ativo {
-  background: white;
-  border-bottom: 2px solid white;
+  background: darkgray;
+  border-bottom: 2px solid darkgray;
   z-index: 1;
 }
 .aba {
