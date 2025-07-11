@@ -12,10 +12,21 @@ body {
   border-radius: 8px;
   padding: 20px;
 }
+
+header {
+  background: #1a2a43;
+  color: white;
+}
+
 h1 {
   text-align: center;
   color: #1f2937;
 }
+
+h6 {
+  text-align: center;
+}
+
 .tabs {
   display: flex;
   gap: 5px;
