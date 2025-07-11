@@ -44,7 +44,7 @@ h1 {
   z-index: 1;
 }
 .aba {
-  display: none;
+  display: darkgray;
 }
 .aba.ativa {
   display: block;
