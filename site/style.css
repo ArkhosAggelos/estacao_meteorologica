@@ -47,7 +47,7 @@ h1 {
   display: darkgray;
 }
 .aba.ativa {
-  display: block;
+  display: gray;
 }
 .card-grid {
   display: grid;
