@@ -168,5 +168,6 @@ function carregarGraficoDia() {
 
 carregarTempoReal();
 carregarGraficoHora();
+carregarGraficoHoraTemperatura();
 carregarGraficoDia();
 setInterval(carregarTempoReal, 300000); // 5 minutos
