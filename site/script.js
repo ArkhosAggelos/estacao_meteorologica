@@ -114,6 +114,34 @@ function carregarGraficoHoraTemperatura() {
     });
 }
 
+function carregarGraficoHoraUmidade() {
+  fetch(urlHora, { headers })
+    .then(res => res.json())
+    .then(data => {
+      const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit' }));
+      const umidade = data.map(d => d.umidade_avg);
+
+      new Chart(document.getElementById("grafico-hora-umidade"), {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Umidade (%)",
+              data: umidade,
+              borderColor: "cyan",
+              fill: false,
+              tension: 0.3
+            },
+          ]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    });
+}
+
 function carregarGraficoDia() {
   fetch(urlDia, { headers })
     .then(res => res.json())
@@ -169,5 +197,6 @@ function carregarGraficoDia() {
 carregarTempoReal();
 carregarGraficoHora();
 carregarGraficoHoraTemperatura();
+carregarGraficoHoraUmidade();
 carregarGraficoDia();
 setInterval(carregarTempoReal, 300000); // 5 minutos
