@@ -44,10 +44,10 @@ h1 {
   z-index: 1;
 }
 .aba {
-  display: darkgray;
+  display: none;
 }
 .aba.ativa {
-  display: gray;
+  display: block;
 }
 .card-grid {
   display: grid;
