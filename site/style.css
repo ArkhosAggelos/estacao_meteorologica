@@ -11,6 +11,7 @@ body {
   background: white;
   border-radius: 8px;
   padding: 20px;
+  place-items: ;
 }
 
 header {
@@ -24,7 +25,7 @@ header {
   background: #1a2a43;
   border-radius: 8px;
   padding: 20px;
-
+  padding-bottom: 20px;
 }
 
 h6 {
