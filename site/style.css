@@ -43,6 +43,7 @@ h6 {
   gap: 5px; /* Define espaçamento entre as abas */
   margin-bottom: 20px; /* Define margem inferior */
   border-bottom: 2px solid #ccc; /* Adiciona uma borda inferior */
+  border-radius: 6px; /* Define bordas arredondadas */
 }
 
 /* Estilização dos botões das abas */
