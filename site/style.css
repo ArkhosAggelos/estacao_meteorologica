@@ -14,9 +14,17 @@ body {
 }
 
 header {
-  background: #1a2a43;
   text-align: center;
   color: white;
+}
+
+.cabecalho {
+  ax-width: 900px;
+  margin: auto;
+  background: #1a2a43;
+  border-radius: 8px;
+  padding: 20px;
+
 }
 
 h6 {
