@@ -16,6 +16,13 @@ body {
   padding: 20px; /* Define espaçamento interno */
   place-items: ; /* Propriedade incompleta */
 }
+/* Estilização mensagem de erro dos gráficos*/
+.sem-dados {
+  text-align: center;
+  color: #888;
+  margin: 2em 0;
+  font-size: 1.2em;
+}
 
 /* Estilização do cabeçalho */
 header {
