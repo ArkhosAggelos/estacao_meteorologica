@@ -9,7 +9,7 @@ const dataHoraISO = dataHoraLimite.toISOString();
 const dataDiaISO = dataDiaLimite.toISOString().split("T")[0];
 
 const urlTempoReal = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras?select=*&order=id.desc&limit=1";
-const urlHora = `https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_hora?select=*&id=gte.${dataHoraISO}&order=id.asc`;
+const urlHora = `https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_hora?select=*&order=id.asc&id=gte.${dataHoraISO}`;
 const urlDia = `https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_dia?select=*&id=lte.${dataDiaISO}&order=id.asc`;
 
 const headers = {
