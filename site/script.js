@@ -1,20 +1,18 @@
-// script.js atualizado com filtros dinâmicos para as últimas 24h e últimos 30 dias
-
 const agora = new Date();
 const dataHoraLimite = new Date(agora.getTime() - 24 * 60 * 60 * 1000);
 const dataDiaLimite = new Date(agora);
-dataDiaLimite.setDate(dataDiaLimite.getDate() - 1);
+dataDiaLimite.setDate(dataDiaLimite.getDate() - 29); // últimos 30 dias
 
 const dataHoraISO = dataHoraLimite.toISOString();
 const dataDiaISO = dataDiaLimite.toISOString().split("T")[0];
 
 const urlTempoReal = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras?select=*&order=id.desc&limit=1";
 const urlHora = `https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_hora?select=*&order=id.asc&id=gte.${dataHoraISO}`;
-const urlDia = `https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_dia?select=*&id=lte.${dataDiaISO}&order=id.asc`;
+const urlDia = `https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_dia?select=*&id=gte.${dataDiaISO}&order=id.asc`;
 
 const headers = {
-  apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqYXB0eG94eXJxeXFhb3JraXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5NDg3MjUsImV4cCI6MjA1OTUyNDcyNX0.EUqY36QI7ey3cVBAHZsG4x4oTSPP2Etyxc7xY4I7v-0",
-  Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqYXB0eG94eXJxeXFhb3JraXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5NDg3MjUsImV4cCI6MjA1OTUyNDcyNX0.EUqY36QI7ey3cVBAHZsG4x4oTSPP2Etyxc7xY4I7v-0",
+  apikey: "SUA_API_KEY_AQUI",
+  Authorization: "Bearer SUA_API_KEY_AQUI"
 };
 
 function mostrarAba(id) {
@@ -40,15 +38,36 @@ function carregarTempoReal() {
             <div class="card"><p><span class="card-icon">🕒</span>${new Date(d.id).toLocaleString("pt-BR")}</p></div>
           </div>
         `;
+      } else {
+        document.getElementById("dados-tempo-real").innerHTML = `
+          <p class="sem-dados">Sem dados disponíveis no momento.</p>
+        `;
       }
     });
 }
 
+function mensagemSemDados(msg, idCanvas) {
+  const canvas = document.getElementById(idCanvas);
+  if (canvas) {
+    const parent = canvas.parentElement;
+    parent.innerHTML = `<p class="sem-dados">${msg}</p>`;
+  }
+}
+
+// Gráficos de hora
 function carregarGraficoHora() {
   fetch(urlHora, { headers })
     .then(res => res.json())
     .then(data => {
-      const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit' }));
+      if (data.length === 0) {
+        mensagemSemDados("Sem dados disponíveis para as últimas 24h.", "grafico-hora-temp");
+        mensagemSemDados("Sem dados disponíveis para as últimas 24h.", "grafico-hora-umidade");
+        mensagemSemDados("Sem dados disponíveis para as últimas 24h.", "grafico-hora-pressao");
+        mensagemSemDados("Sem dados disponíveis para as últimas 24h.", "grafico-hora-lux");
+        return;
+      }
+
+      const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' }));
       const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
       const pressao = data.map(d => d.pressao_avg);
@@ -80,10 +99,16 @@ function carregarGraficoHora() {
     });
 }
 
+// Gráfico diário
 function carregarGraficoDia() {
   fetch(urlDia, { headers })
     .then(res => res.json())
     .then(data => {
+      if (data.length === 0) {
+        mensagemSemDados("Sem dados disponíveis para os últimos 30 dias.", "grafico-dia");
+        return;
+      }
+
       const labels = data.map(d => new Date(d.id).toLocaleDateString("pt-BR"));
       const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
@@ -115,3 +140,13 @@ setInterval(() => {
   carregarGraficoHora();
   carregarGraficoDia();
 }, 300000);
+
+// CSS sugestão para a mensagem (adicione ao seu CSS)
+/*
+.sem-dados {
+  text-align: center;
+  color: #888;
+  margin: 2em 0;
+  font-size: 1.2em;
+}
+*/
