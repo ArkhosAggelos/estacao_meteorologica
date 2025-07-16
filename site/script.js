@@ -1,16 +1,6 @@
-// script.js atualizado com filtros dinâmicos para as últimas 24h e últimos 30 dias
-
-const agora = new Date();
-const dataHoraLimite = new Date(agora.getTime() - 24 * 60 * 60 * 1000);
-const dataDiaLimite = new Date(agora);
-dataDiaLimite.setDate(dataDiaLimite.getDate() - 1);
-
-const dataHoraISO = dataHoraLimite.toISOString();
-const dataDiaISO = dataDiaLimite.toISOString().split("T")[0];
-
 const urlTempoReal = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras?select=*&order=id.desc&limit=1";
-const urlHora = `https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_hora?select=*&id=gte.${dataHoraISO}&order=id.asc`;
-const urlDia = `https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_dia?select=*&id=lte.${dataDiaISO}&order=id.asc`;
+const urlHora = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_hora?select=*&order=id.asc&limit=24";
+const urlDia = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_dia?select=*&order=id.asc&limit=30";
 
 const headers = {
   apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqYXB0eG94eXJxeXFhb3JraXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5NDg3MjUsImV4cCI6MjA1OTUyNDcyNX0.EUqY36QI7ey3cVBAHZsG4x4oTSPP2Etyxc7xY4I7v-0",
@@ -54,28 +44,44 @@ function carregarGraficoHora() {
       const pressao = data.map(d => d.pressao_avg);
       const lux = data.map(d => d.lux_avg);
 
-      new Chart(document.getElementById("grafico-hora-temp"), {
+      new Chart(document.getElementById("grafico-hora"), {
         type: "line",
-        data: { labels, datasets: [{ label: "Temperatura (°C)", data: temperatura, borderColor: "blue", fill: false }] },
-        options: { responsive: true }
-      });
-
-      new Chart(document.getElementById("grafico-hora-umidade"), {
-        type: "line",
-        data: { labels, datasets: [{ label: "Umidade (%)", data: umidade, borderColor: "cyan", fill: false }] },
-        options: { responsive: true }
-      });
-
-      new Chart(document.getElementById("grafico-hora-pressao"), {
-        type: "line",
-        data: { labels, datasets: [{ label: "Pressão (hPa)", data: pressao, borderColor: "gray", fill: false }] },
-        options: { responsive: true }
-      });
-
-      new Chart(document.getElementById("grafico-hora-lux"), {
-        type: "line",
-        data: { labels, datasets: [{ label: "Luminosidade (lx)", data: lux, borderColor: "orange", fill: false }] },
-        options: { responsive: true }
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Temperatura (°C)",
+              data: temperatura,
+              borderColor: "blue",
+              fill: false,
+              tension: 0.3
+            },
+            {
+              label: "Umidade (%)",
+              data: umidade,
+              borderColor: "cyan",
+              fill: false,
+              tension: 0.3
+            },
+            {
+              label: "Pressão (hPa)",
+              data: pressao,
+              borderColor: "gray",
+              fill: false,
+              tension: 0.3
+            },
+            {
+              label: "Luminosidade (lx)",
+              data: lux,
+              borderColor: "orange",
+              fill: false,
+              tension: 0.3
+            }
+          ]
+        },
+        options: {
+          responsive: true
+        }
       });
     });
 }
@@ -93,15 +99,41 @@ function carregarGraficoDia() {
       new Chart(document.getElementById("grafico-dia"), {
         type: "line",
         data: {
-          labels,
+          labels: labels,
           datasets: [
-            { label: "Temperatura (°C)", data: temperatura, borderColor: "blue", fill: false },
-            { label: "Umidade (%)", data: umidade, borderColor: "cyan", fill: false },
-            { label: "Pressão (hPa)", data: pressao, borderColor: "gray", fill: false },
-            { label: "Luminosidade (lx)", data: lux, borderColor: "orange", fill: false },
+            {
+              label: "Temperatura (°C)",
+              data: temperatura,
+              borderColor: "blue",
+              fill: false,
+              tension: 0.3
+            },
+            {
+              label: "Umidade (%)",
+              data: umidade,
+              borderColor: "cyan",
+              fill: false,
+              tension: 0.3
+            },
+            {
+              label: "Pressão (hPa)",
+              data: pressao,
+              borderColor: "gray",
+              fill: false,
+              tension: 0.3
+            },
+            {
+              label: "Luminosidade (lx)",
+              data: lux,
+              borderColor: "orange",
+              fill: false,
+              tension: 0.3
+            }
           ]
         },
-        options: { responsive: true }
+        options: {
+          responsive: true
+        }
       });
     });
 }
@@ -109,9 +141,4 @@ function carregarGraficoDia() {
 carregarTempoReal();
 carregarGraficoHora();
 carregarGraficoDia();
-
-setInterval(() => {
-  carregarTempoReal();
-  carregarGraficoHora();
-  carregarGraficoDia();
-}, 300000);
+setInterval(carregarTempoReal, 300000); // 5 minutos

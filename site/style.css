@@ -1,113 +1,71 @@
-/* Estilização geral do corpo da página */
 body {
-  font-family: sans-serif; /* Define uma fonte sem serifa */
-  background: #f3f4f6; /* Define a cor de fundo da página */
-  color: #111827; /* Define a cor do texto */
-  margin: 0; /* Remove margens padrão */
-  padding: 20px; /* Define espaçamento interno ao redor do conteúdo */
+  font-family: sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+  margin: 0;
+  padding: 20px;
 }
-
-/* Estilização do contêiner principal */
 .container {
-  max-width: 900px; /* Define a largura máxima do contêiner */
-  margin: auto; /* Centraliza o contêiner horizontalmente */
-  background: white; /* Define o fundo branco */
-  border-radius: 8px; /* Define bordas arredondadas */
-  padding: 20px; /* Define espaçamento interno */
-  place-items: ; /* Propriedade incompleta */
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
 }
-
-/* Estilização do cabeçalho */
-header {
-  text-align: center; /* Centraliza o texto no cabeçalho */
-  color: white; /* Define a cor do texto */
+h1 {
+  text-align: center;
+  color: #1f2937;
 }
-
-/* Estilização do cabeçalho específico */
-.cabecalho {
-  max-width: 900px; /* Define a largura máxima */
-  margin: auto; /* Centraliza o bloco horizontalmente */
-  background: #1a2a43; /* Define a cor de fundo azul escuro */
-  border-radius: 8px; /* Define bordas arredondadas */
-  padding: 20px; /* Define espaçamento interno */
-}
-
-/* Estilização para elementos <h6> */
-h6 {
-  text-align: center; /* Centraliza o texto */
-}
-
-/* Estilização das abas de navegação */
 .tabs {
-  display: flex; /* Exibe as abas como elementos flexíveis */
-  gap: 5px; /* Define espaçamento entre as abas */
-  margin-bottom: 20px; /* Define margem inferior */
-  border-bottom: 2px solid #ccc; /* Adiciona uma borda inferior */
-  border-radius: 6px; /* Define bordas arredondadas */
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ccc;
 }
-
-/* Estilização dos botões das abas */
 .tabs button {
-  background: #e5e7eb; /* Cor de fundo padrão */
-  color: #1f2937; /* Cor do texto */
-  padding: 10px 20px; /* Define espaçamento interno */
-  border: none; /* Remove bordas */
-  border-top-left-radius: 8px; /* Define borda superior esquerda arredondada */
-  border-top-right-radius: 8px; /* Define borda superior direita arredondada */
-  clip-path: polygon(0 100%, 10% 0, 90% 0, 100% 100%); /* Define um formato personalizado */
-  font-weight: bold; /* Define o texto em negrito */
-  cursor: pointer; /* Altera o cursor para indicar interatividade */
-  position: relative; /* Define posicionamento relativo */
-  top: 2px; /* Ajusta a posição vertical */
+  background: #e5e7eb;
+  color: #1f2937;
+  padding: 10px 20px;
+  border: none;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  clip-path: polygon(0 100%, 10% 0, 90% 0, 100% 100%);
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  top: 2px;
 }
-
-/* Estilização dos botões das abas ao passar o mouse */
 .tabs button:hover {
-  background: #000000; /* Cor de fundo ao passar o mouse */
-  color: white; /* Cor do texto ao passar o mouse */
+  background: #d1d5db;
 }
-
-/* Estilização para a aba ativa */
 .tabs button.ativo {
-  background: darkgray; /* Cor de fundo para aba ativa */
-  border-bottom: 2px solid darkgray; /* Adiciona uma borda inferior à aba ativa */
-  z-index: 1; /* Define a hierarquia da aba ativa */
+  background: white;
+  border-bottom: 2px solid white;
+  z-index: 1;
 }
-
-/* Estilização para conteúdo das abas */
 .aba {
-  display: none; /* Oculta o conteúdo por padrão */
+  display: none;
 }
-
-/* Exibe o conteúdo da aba ativa */
 .aba.ativa {
-  display: block; /* Torna o conteúdo visível */
+  display: block;
 }
-
-/* Estilização de um grid para cartões */
 .card-grid {
-  display: grid; /* Define um grid para os cartões */
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Ajusta as colunas automaticamente */
-  gap: 10px; /* Define o espaçamento entre os cartões */
-  margin-top: 10px; /* Define margem superior */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
 }
-
-/* Estilização individual dos cartões */
 .card {
-  background: #f9fafb; /* Define a cor de fundo */
-  border-left: 6px solid #3b82f6; /* Adiciona uma borda à esquerda */
-  padding: 10px; /* Define espaçamento interno */
-  border-radius: 6px; /* Define bordas arredondadas */
+  background: #f9fafb;
+  border-left: 6px solid #3b82f6;
+  padding: 10px;
+  border-radius: 6px;
 }
-
-/* Estilização para parágrafos dentro de cartões */
 .card p {
-  margin: 5px 0; /* Define margens verticais */
-  font-size: 0.95rem; /* Ajusta o tamanho da fonte */
+  margin: 5px 0;
+  font-size: 0.95rem;
 }
-
-/* Estilização para ícones dentro de cartões */
 .card-icon {
-  font-size: 1.5rem; /* Define o tamanho do ícone */
-  margin-right: 5px; /* Define espaçamento à direita do ícone */
+  font-size: 1.5rem;
+  margin-right: 5px;
 }
