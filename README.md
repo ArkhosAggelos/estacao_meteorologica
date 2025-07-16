@@ -19,7 +19,7 @@ Este projeto consiste em uma estação meteorológica compacta, baseada no micro
 
 - Leitura de **temperatura**, **umidade**, **pressão atmosférica**, **altitude** e **luminosidade**
 - Registro de **data e hora** com precisão UTC
-- Acesso dos registros em página web (https://arkhosaggelos.github.io/estacao_meteorologica/)
+- Acesso dos registros em página web (https://arkhosaggelos.github.io/estacao_meteorologica/site)
 
 ## ⚙️ Pinagem na Estação (NodeMCU ↔ Módulos)
 
