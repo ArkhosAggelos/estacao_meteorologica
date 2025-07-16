@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estação Meteorológica</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Estação Meteorológica</h1>
+    <div class="tabs">
+      <button onclick="mostrarAba('tempo-real')">Tempo Real</button>
+      <button onclick="mostrarAba('hora')">Últimas 24h</button>
+      <button onclick="mostrarAba('dia')">Últimos 30 Dias</button>
+    </div>
+
+    <div id="tempo-real" class="aba ativa">
+      <h2>Leitura Atual</h2>
+      <div id="dados-tempo-real"></div>
+    </div>
+
+    <div id="hora" class="aba">
+      <h2>Dados por Hora (24h)</h2>
+      <canvas id="grafico-hora"></canvas>
+    </div>
+
+    <div id="dia" class="aba">
+      <h2>Dados por Dia (30 dias)</h2>
+      <canvas id="grafico-dia"></canvas>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
