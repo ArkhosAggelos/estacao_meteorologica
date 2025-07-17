@@ -56,10 +56,10 @@ function carregarGraficoHora() {
 
       const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit' }));
 
-      const temperatura = data.map(d => d["temperatura_média"]);
+      const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
-      const pressao = data.map(d => d["pressão_média"]);
-      const lux = data.map(d => d["lux_média"]);
+      const pressao = data.map(d => d.pressão_avg);
+      const lux = data.map(d => d.lux_avg);
 
 
       if (chartHoraTemp) chartHoraTemp.destroy();
@@ -98,10 +98,10 @@ function carregarGraficoDia() {
     .then(data => {
       const labels = data.map(d => new Date(d.id).toLocaleDateString("pt-BR"));
 
-      const temperatura = data.map(d => d["temperatura_média"]);
+      const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
-      const pressao = data.map(d => d["pressão_média"]);
-      const lux = data.map(d => d["lux_média"]);
+      const pressao = data.map(d => d.pressão_avg);
+      const lux = data.map(d => d.lux_avg);
 
       if (chartDiaTemp) chartDiaTemp.destroy();
       chartDiaTemp = new Chart(document.getElementById("grafico-dia-temperatura"), {
