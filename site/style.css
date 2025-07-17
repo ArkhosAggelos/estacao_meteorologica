@@ -89,6 +89,16 @@ h1 {
   margin-top: 20px;
 }
 
+.grafico-grid canvas {
+  width: 100% !important;
+  height: 300px !important;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 canvas {
   background-color: #fff;
   border: 1px solid #ccc;
