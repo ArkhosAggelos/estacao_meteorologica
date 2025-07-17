@@ -99,13 +99,6 @@ h1 {
   box-sizing: border-box;
 }
 
-canvas {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 10px;
-}
-
 .texto-projeto {
   line-height: 1.6;
   font-size: 1rem;
