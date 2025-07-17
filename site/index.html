@@ -14,6 +14,7 @@
       <button onclick="mostrarAba('tempo-real')">Tempo Real</button>
       <button onclick="mostrarAba('hora')">Últimas 24h</button>
       <button onclick="mostrarAba('dia')">Últimos 30 Dias</button>
+      <button onclick="mostrarAba('projeto')">Projeto</button>
     </div>
 
     <div id="tempo-real" class="aba ativa">
@@ -30,6 +31,44 @@
       <h2>Dados por Dia (30 dias)</h2>
       <canvas id="grafico-dia"></canvas>
     </div>
+
+    <div id="projeto" class="aba">
+      <h2>Sobre o Projeto</h2>
+      <div class="texto-projeto">
+        <p>Esta aplicação web exibe, em tempo real, os dados coletados por uma mini estação meteorológica construída com um microcontrolador <strong>NodeMCU ESP8266</strong> e diversos sensores ambientais. O projeto foi desenvolvido com o objetivo de monitorar as condições atmosféricas locais, como temperatura, umidade, pressão e luminosidade, e apresentar as informações de forma visual e acessível por meio de gráficos e cartões interativos.</p>
+
+        <h3>🔧 Componentes utilizados:</h3>
+        <ul>
+          <li><strong>NodeMCU ESP8266</strong> – módulo Wi-Fi e microcontrolador</li>
+          <li><strong>Sensor AHT10</strong> – temperatura e umidade</li>
+          <li><strong>Sensor BMP180</strong> – pressão atmosférica</li>
+          <li><strong>Sensor BH1750</strong> – luminosidade (lux)</li>
+          <li><strong>Supabase</strong> – banco de dados em nuvem para armazenar as leituras</li>
+          <li><strong>Vercel</strong> – hospedagem gratuita do frontend do site</li>
+          <li><strong>Chart.js</strong> – biblioteca para geração dos gráficos</li>
+        </ul>
+
+        <h3>📡 Funcionamento</h3>
+        <p>O NodeMCU realiza leituras periódicas dos sensores e envia os dados via HTTP para o Supabase. O site acessa esses dados e exibe:</p>
+        <ul>
+          <li>Leitura mais recente em tempo real</li>
+          <li>Gráfico com médias horárias das últimas 24 horas</li>
+          <li>Gráfico com médias diárias dos últimos 30 dias</li>
+        </ul>
+
+        <h3>🎯 Objetivos didáticos e práticos</h3>
+        <p>Este projeto foi criado com fins educacionais e experimentais, sendo ideal para:</p>
+        <ul>
+          <li>Aulas de <strong>robótica</strong>, <strong>IoT</strong> e <strong>programação embarcada</strong></li>
+          <li>Projetos de <strong>monitoramento ambiental</strong></li>
+          <li>Desenvolvimento de habilidades em <strong>web development</strong> e <strong>banco de dados em nuvem</strong></li>
+        </ul>
+
+        <h3>🌐 Tecnologias integradas</h3>
+        <p>A estrutura combina hardware físico, transmissão de dados via Wi-Fi, armazenamento em nuvem e visualização em tempo real, criando um sistema completo, portátil e personalizável de monitoramento meteorológico.</p>
+      </div>
+    </div>
+
   </div>
 
   <script src="script.js"></script>

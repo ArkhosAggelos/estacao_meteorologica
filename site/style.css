@@ -5,6 +5,7 @@ body {
   margin: 0;
   padding: 20px;
 }
+
 .container {
   max-width: 900px;
   margin: auto;
@@ -12,16 +13,19 @@ body {
   border-radius: 8px;
   padding: 20px;
 }
+
 h1 {
   text-align: center;
   color: #1f2937;
 }
+
 .tabs {
   display: flex;
   gap: 5px;
   margin-bottom: 20px;
   border-bottom: 2px solid #ccc;
 }
+
 .tabs button {
   background: #e5e7eb;
   color: #1f2937;
@@ -35,37 +39,59 @@ h1 {
   position: relative;
   top: 2px;
 }
+
 .tabs button:hover {
   background: #d1d5db;
 }
+
 .tabs button.ativo {
   background: white;
   border-bottom: 2px solid white;
   z-index: 1;
 }
+
 .aba {
   display: none;
 }
+
 .aba.ativa {
   display: block;
 }
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 10px;
   margin-top: 10px;
 }
+
 .card {
   background: #f9fafb;
   border-left: 6px solid #3b82f6;
   padding: 10px;
   border-radius: 6px;
 }
+
 .card p {
   margin: 5px 0;
   font-size: 0.95rem;
 }
+
 .card-icon {
   font-size: 1.5rem;
   margin-right: 5px;
+}
+
+.texto-projeto {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.texto-projeto ul {
+  margin: 0 0 1rem 1.5rem;
+}
+
+.texto-projeto h3 {
+  margin-top: 1.5rem;
+  color: #1f2937;
 }
