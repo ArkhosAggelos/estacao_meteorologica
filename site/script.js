@@ -51,6 +51,9 @@ function carregarGraficoHora() {
   fetch(urlHora, { headers })
     .then(res => res.json())
     .then(data => {
+        console.log("Dados `leituras_hora`:", data);
+        console.log("Nomes das propriedades:", data.length && Object.keys(data[0]));
+
       const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit' }));
 
       const temperatura = data.map(d => d["temperatura_média"]);
