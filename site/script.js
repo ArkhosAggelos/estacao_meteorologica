@@ -14,7 +14,7 @@ function mostrarAba(id) {
   document.querySelectorAll(".aba").forEach(div => div.classList.remove("ativa"));
   document.getElementById(id).classList.add("ativa");
   document.querySelectorAll(".tabs button").forEach(btn => btn.classList.remove("ativo"));
-  document.querySelector(\`.tabs button[onclick="mostrarAba('\${id}')"]\`).classList.add("ativo");
+  document.querySelector(`.tabs button[onclick="mostrarAba('${id}')"]`).classList.add("ativo");
 }
 
 function carregarTempoReal() {
@@ -23,16 +23,16 @@ function carregarTempoReal() {
     .then(data => {
       if (data.length > 0) {
         const d = data[0];
-        document.getElementById("dados-tempo-real").innerHTML = \`
+        document.getElementById("dados-tempo-real").innerHTML = `
           <div class="card-grid">
-            <div class="card"><p><span class="card-icon">🌡️</span><strong>\${d.temperatura} °C</strong></p></div>
-            <div class="card"><p><span class="card-icon">💧</span><strong>\${d.umidade} %</strong></p></div>
-            <div class="card"><p><span class="card-icon">🌀</span><strong>\${d.pressao} hPa</strong></p></div>
-            <div class="card"><p><span class="card-icon">💡</span><strong>\${d.lux} lx</strong></p></div>
-            <div class="card"><p><span class="card-icon">🌤️</span><strong>\${d.previsao}</strong></p></div>
-            <div class="card"><p><span class="card-icon">🕒</span><strong>\${new Date(d.id).toLocaleString("pt-BR")}</strong></p></div>
+            <div class="card"><p><span class="card-icon">🌡️</span><strong>${d.temperatura} °C</strong></p></div>
+            <div class="card"><p><span class="card-icon">💧</span><strong>${d.umidade} %</strong></p></div>
+            <div class="card"><p><span class="card-icon">🌀</span><strong>${d.pressao} hPa</strong></p></div>
+            <div class="card"><p><span class="card-icon">💡</span><strong>${d.lux} lx</strong></p></div>
+            <div class="card"><p><span class="card-icon">🌤️</span><strong>${d.previsao}</strong></p></div>
+            <div class="card"><p><span class="card-icon">🕒</span><strong>${new Date(d.id).toLocaleString("pt-BR")}</strong></p></div>
           </div>
-        \`;
+        `;
       }
     });
 }
@@ -98,4 +98,4 @@ function carregarGraficoDia() {
 carregarTempoReal();
 carregarGraficoHora();
 carregarGraficoDia();
-setInterval(carregarTempoReal, 300000); // 5 minutos
+setInterval(carregarTempoReal, 300000); // Atualiza a cada 5 minutos
