@@ -15,6 +15,13 @@ function mostrarAba(id) {
   document.getElementById(id).classList.add("ativa");
   document.querySelectorAll(".tabs button").forEach(btn => btn.classList.remove("ativo"));
   document.querySelector(`.tabs button[onclick="mostrarAba('${id}')"]`).classList.add("ativo");
+
+  // ✅ Carregar os gráficos SOMENTE quando a aba correspondente for ativada
+  if (id === "hora") {
+    carregarGraficoHora();
+  } else if (id === "dia") {
+    carregarGraficoDia();
+  }
 }
 
 function carregarTempoReal() {
@@ -25,12 +32,12 @@ function carregarTempoReal() {
         const d = data[0];
         document.getElementById("dados-tempo-real").innerHTML = `
           <div class="card-grid">
-            <div class="card"><p><span class="card-icon">🌡️</span><strong>${d.temperatura} °C</strong></p></div>
-            <div class="card"><p><span class="card-icon">💧</span><strong>${d.umidade} %</strong></p></div>
-            <div class="card"><p><span class="card-icon">🌀</span><strong>${d.pressao} hPa</strong></p></div>
-            <div class="card"><p><span class="card-icon">💡</span><strong>${d.lux} lx</strong></p></div>
-            <div class="card"><p><span class="card-icon">🌤️</span><strong>${d.previsao}</strong></p></div>
-            <div class="card"><p><span class="card-icon">🕒</span><strong>${new Date(d.id).toLocaleString("pt-BR")}</strong></p></div>
+            <div class="card"><p><span class="card-icon">&#127777;</span><strong>${d.temperatura} °C</strong></p></div>
+            <div class="card"><p><span class="card-icon">&#128167;</span><strong>${d.umidade} %</strong></p></div>
+            <div class="card"><p><span class="card-icon">&#127744;</span><strong>${d.pressao} hPa</strong></p></div>
+            <div class="card"><p><span class="card-icon">&#128161;</span><strong>${d.lux} lx</strong></p></div>
+            <div class="card"><p><span class="card-icon">&#127781;</span><strong>${d.previsao}</strong></p></div>
+            <div class="card"><p><span class="card-icon">&#128339;</span><strong>${new Date(d.id).toLocaleString("pt-BR")}</strong></p></div>
           </div>
         `;
       }
@@ -95,7 +102,6 @@ function carregarGraficoDia() {
     });
 }
 
+// ✅ Somente tempo real é carregado automaticamente
 carregarTempoReal();
-carregarGraficoHora();
-carregarGraficoDia();
 setInterval(carregarTempoReal, 300000); // Atualiza a cada 5 minutos
