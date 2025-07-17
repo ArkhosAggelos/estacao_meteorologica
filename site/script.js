@@ -1,14 +1,22 @@
+
 const urlTempoReal = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras?select=*&order=id.desc&limit=1";
 const urlHora = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_hora?select=*&order=id.asc&limit=24";
 const urlDia = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_dia?select=*&order=id.asc&limit=30";
 
 const headers = {
-  apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqYXB0eG94eXJxeXFhb3JraXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5NDg3MjUsImV4cCI6MjA1OTUyNDcyNX0.EUqY36QI7ey3cVBAHZsG4x4oTSPP2Etyxc7xY4I7v-0",
-  Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqYXB0eG94eXJxeXFhb3JraXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5NDg3MjUsImV4cCI6MjA1OTUyNDcyNX0.EUqY36QI7ey3cVBAHZsG4x4oTSPP2Etyxc7xY4I7v-0",
+  apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 };
 
-let chartHora = null;
-let chartDia = null;
+let chartHoraTemp = null;
+let chartHoraUmidade = null;
+let chartHoraPressao = null;
+let chartHoraLux = null;
+
+let chartDiaTemp = null;
+let chartDiaUmidade = null;
+let chartDiaPressao = null;
+let chartDiaLux = null;
 
 function mostrarAba(id) {
   document.querySelectorAll(".aba").forEach(div => div.classList.remove("ativa"));
@@ -16,12 +24,8 @@ function mostrarAba(id) {
   document.querySelectorAll(".tabs button").forEach(btn => btn.classList.remove("ativo"));
   document.querySelector(`.tabs button[onclick="mostrarAba('${id}')"]`).classList.add("ativo");
 
-  // ✅ Carregar os gráficos SOMENTE quando a aba correspondente for ativada
-  if (id === "hora") {
-    carregarGraficoHora();
-  } else if (id === "dia") {
-    carregarGraficoDia();
-  }
+  if (id === "hora") carregarGraficoHora();
+  else if (id === "dia") carregarGraficoDia();
 }
 
 function carregarTempoReal() {
@@ -38,8 +42,7 @@ function carregarTempoReal() {
             <div class="card"><p><span class="card-icon">&#128161;</span><strong>${d.lux} lx</strong></p></div>
             <div class="card"><p><span class="card-icon">&#127781;</span><strong>${d.previsao}</strong></p></div>
             <div class="card"><p><span class="card-icon">&#128339;</span><strong>${new Date(d.id).toLocaleString("pt-BR")}</strong></p></div>
-          </div>
-        `;
+          </div>`;
       }
     });
 }
@@ -49,26 +52,38 @@ function carregarGraficoHora() {
     .then(res => res.json())
     .then(data => {
       const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit' }));
+
       const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
       const pressao = data.map(d => d.pressao_avg);
       const lux = data.map(d => d.lux_avg);
 
-      if (chartHora) chartHora.destroy();
-      chartHora = new Chart(document.getElementById("grafico-hora"), {
+      if (chartHoraTemp) chartHoraTemp.destroy();
+      chartHoraTemp = new Chart(document.getElementById("grafico-hora-temperatura"), {
         type: "line",
-        data: {
-          labels,
-          datasets: [
-            { label: "Temperatura (°C)", data: temperatura, borderColor: "blue", fill: false, tension: 0.3 },
-            { label: "Umidade (%)", data: umidade, borderColor: "cyan", fill: false, tension: 0.3 },
-            { label: "Pressão (hPa)", data: pressao, borderColor: "gray", fill: false, tension: 0.3 },
-            { label: "Luminosidade (lx)", data: lux, borderColor: "orange", fill: false, tension: 0.3 }
-          ]
-        },
-        options: {
-          responsive: true
-        }
+        data: { labels, datasets: [{ label: "Temperatura (°C)", data: temperatura, borderColor: "blue", fill: false, tension: 0.3 }] },
+        options: { responsive: true }
+      });
+
+      if (chartHoraUmidade) chartHoraUmidade.destroy();
+      chartHoraUmidade = new Chart(document.getElementById("grafico-hora-umidade"), {
+        type: "line",
+        data: { labels, datasets: [{ label: "Umidade (%)", data: umidade, borderColor: "cyan", fill: false, tension: 0.3 }] },
+        options: { responsive: true }
+      });
+
+      if (chartHoraPressao) chartHoraPressao.destroy();
+      chartHoraPressao = new Chart(document.getElementById("grafico-hora-pressao"), {
+        type: "line",
+        data: { labels, datasets: [{ label: "Pressão (hPa)", data: pressao, borderColor: "gray", fill: false, tension: 0.3 }] },
+        options: { responsive: true }
+      });
+
+      if (chartHoraLux) chartHoraLux.destroy();
+      chartHoraLux = new Chart(document.getElementById("grafico-hora-lux"), {
+        type: "line",
+        data: { labels, datasets: [{ label: "Luminosidade (lx)", data: lux, borderColor: "orange", fill: false, tension: 0.3 }] },
+        options: { responsive: true }
       });
     });
 }
@@ -78,30 +93,41 @@ function carregarGraficoDia() {
     .then(res => res.json())
     .then(data => {
       const labels = data.map(d => new Date(d.id).toLocaleDateString("pt-BR"));
+
       const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
       const pressao = data.map(d => d.pressao_avg);
       const lux = data.map(d => d.lux_avg);
 
-      if (chartDia) chartDia.destroy();
-      chartDia = new Chart(document.getElementById("grafico-dia"), {
+      if (chartDiaTemp) chartDiaTemp.destroy();
+      chartDiaTemp = new Chart(document.getElementById("grafico-dia-temperatura"), {
         type: "line",
-        data: {
-          labels,
-          datasets: [
-            { label: "Temperatura (°C)", data: temperatura, borderColor: "blue", fill: false, tension: 0.3 },
-            { label: "Umidade (%)", data: umidade, borderColor: "cyan", fill: false, tension: 0.3 },
-            { label: "Pressão (hPa)", data: pressao, borderColor: "gray", fill: false, tension: 0.3 },
-            { label: "Luminosidade (lx)", data: lux, borderColor: "orange", fill: false, tension: 0.3 }
-          ]
-        },
-        options: {
-          responsive: true
-        }
+        data: { labels, datasets: [{ label: "Temperatura (°C)", data: temperatura, borderColor: "blue", fill: false, tension: 0.3 }] },
+        options: { responsive: true }
+      });
+
+      if (chartDiaUmidade) chartDiaUmidade.destroy();
+      chartDiaUmidade = new Chart(document.getElementById("grafico-dia-umidade"), {
+        type: "line",
+        data: { labels, datasets: [{ label: "Umidade (%)", data: umidade, borderColor: "cyan", fill: false, tension: 0.3 }] },
+        options: { responsive: true }
+      });
+
+      if (chartDiaPressao) chartDiaPressao.destroy();
+      chartDiaPressao = new Chart(document.getElementById("grafico-dia-pressao"), {
+        type: "line",
+        data: { labels, datasets: [{ label: "Pressão (hPa)", data: pressao, borderColor: "gray", fill: false, tension: 0.3 }] },
+        options: { responsive: true }
+      });
+
+      if (chartDiaLux) chartDiaLux.destroy();
+      chartDiaLux = new Chart(document.getElementById("grafico-dia-lux"), {
+        type: "line",
+        data: { labels, datasets: [{ label: "Luminosidade (lx)", data: lux, borderColor: "orange", fill: false, tension: 0.3 }] },
+        options: { responsive: true }
       });
     });
 }
 
-// ✅ Somente tempo real é carregado automaticamente
 carregarTempoReal();
-setInterval(carregarTempoReal, 300000); // Atualiza a cada 5 minutos
+setInterval(carregarTempoReal, 300000);
