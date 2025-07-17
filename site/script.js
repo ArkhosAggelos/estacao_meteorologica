@@ -1,7 +1,6 @@
-
 const urlTempoReal = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras?select=*&order=id.desc&limit=1";
-const urlHora = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_hora?select=*&order=id.asc&limit=24";
-const urlDia = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_dia?select=*&order=id.asc&limit=30";
+const urlHora = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_hora?select=*&order=id.desc&limit=24";
+const urlDia = "https://ajaptxoxyrqyqaorkisl.supabase.co/rest/v1/leituras_dia?select=*&order=id.desc&limit=30";
 
 const headers = {
   apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqYXB0eG94eXJxeXFhb3JraXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5NDg3MjUsImV4cCI6MjA1OTUyNDcyNX0.EUqY36QI7ey3cVBAHZsG4x4oTSPP2Etyxc7xY4I7v-0",
@@ -51,16 +50,13 @@ function carregarGraficoHora() {
   fetch(urlHora, { headers })
     .then(res => res.json())
     .then(data => {
-        console.log("Dados `leituras_hora`:", data);
-        console.log("Nomes das propriedades:", data.length && Object.keys(data[0]));
+      data.reverse(); // garantir ordem cronológica
 
       const labels = data.map(d => new Date(d.id).toLocaleTimeString("pt-BR", { hour: '2-digit' }));
-
       const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
       const pressao = data.map(d => d.pressao_avg);
       const lux = data.map(d => d.lux_avg);
-
 
       if (chartHoraTemp) chartHoraTemp.destroy();
       chartHoraTemp = new Chart(document.getElementById("grafico-hora-temperatura"), {
@@ -96,8 +92,9 @@ function carregarGraficoDia() {
   fetch(urlDia, { headers })
     .then(res => res.json())
     .then(data => {
-      const labels = data.map(d => new Date(d.id).toLocaleDateString("pt-BR"));
+      data.reverse(); // garantir ordem cronológica
 
+      const labels = data.map(d => new Date(d.id).toLocaleDateString("pt-BR"));
       const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
       const pressao = data.map(d => d.pressao_avg);
