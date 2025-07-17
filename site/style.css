@@ -83,15 +83,15 @@ h1 {
 }
 
 .grafico-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   margin-top: 20px;
 }
 
 .grafico-grid canvas {
   width: 100% !important;
-  height: 300px !important;
+  height: 320px !important;
   background-color: #fff;
   border: 2px solid #727272;
   border-radius: 6px;
