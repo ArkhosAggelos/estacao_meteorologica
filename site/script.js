@@ -58,7 +58,7 @@ function carregarGraficoHora() {
 
       const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
-      const pressao = data.map(d => d.pressão_avg);
+      const pressao = data.map(d => d.pressao_avg);
       const lux = data.map(d => d.lux_avg);
 
 
@@ -100,7 +100,7 @@ function carregarGraficoDia() {
 
       const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
-      const pressao = data.map(d => d.pressão_avg);
+      const pressao = data.map(d => d.pressao_avg);
       const lux = data.map(d => d.lux_avg);
 
       if (chartDiaTemp) chartDiaTemp.destroy();
