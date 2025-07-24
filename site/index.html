@@ -25,14 +25,15 @@
     <!-- Tempo Real -->
     <div id="tempo-real" class="aba ativa">
       <h2>Leitura Atual</h2>
-      <div id="dados-tempo-real" class="card-grid"></div>
-
-      <div class="grafico-grid">
-        <canvas id="grafico-temp-real"></canvas>
-        <canvas id="grafico-umid-real"></canvas>
-        <canvas id="grafico-lux-real"></canvas>
+      <div class="tempo-real-layout">
+        <div id="dados-tempo-real" class="card-grid"></div>
+        <div class="grafico-coluna">
+          <canvas id="grafico-temp-real"></canvas>
+          <canvas id="grafico-umid-real"></canvas>
+          <canvas id="grafico-lux-real"></canvas>
+        </div>
       </div>
-    </div>
+    </div>  
 
     <!-- Últimas 24h -->
     <div id="hora" class="aba">
