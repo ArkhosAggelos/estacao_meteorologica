@@ -27,9 +27,11 @@
       <h2>Leitura Atual</h2>
       <div id="dados-tempo-real" class="card-grid"></div>
 
-      <canvas id="grafico-temp-real"></canvas>
-      <canvas id="grafico-umid-real"></canvas>
-      <canvas id="grafico-lux-real"></canvas>
+      <div class="grafico-grid">
+        <canvas id="grafico-temp-real"></canvas>
+        <canvas id="grafico-umid-real"></canvas>
+        <canvas id="grafico-lux-real"></canvas>
+      </div>
     </div>
 
     <!-- Últimas 24h -->
@@ -60,7 +62,7 @@
       <div class="texto-projeto">
         <p>Esta aplicação web exibe, em tempo real, os dados coletados por uma mini estação meteorológica construída com um microcontrolador <strong>NodeMCU ESP8266</strong> e diversos sensores ambientais. O projeto foi desenvolvido com o objetivo de monitorar as condições atmosféricas locais, como temperatura, umidade, pressão e luminosidade, e apresentar as informações de forma visual e acessível por meio de gráficos e cartões interativos.</p>
 
-        <h3>🔧 Componentes utilizados:</h3>
+        <h3>&#128295; Componentes utilizados:</h3>
         <ul>
           <li><strong>NodeMCU ESP8266</strong> – módulo Wi-Fi e microcontrolador</li>
           <li><strong>Sensor AHT10</strong> – temperatura e umidade</li>
@@ -71,7 +73,7 @@
           <li><strong>Chart.js</strong> – biblioteca para geração dos gráficos</li>
         </ul>
 
-        <h3>📡 Funcionamento</h3>
+        <h3>&#128225; Funcionamento</h3>
         <p>O NodeMCU realiza leituras periódicas dos sensores e envia os dados via HTTP para o Supabase. O site acessa esses dados e exibe:</p>
         <ul>
           <li>Leitura mais recente em tempo real</li>
@@ -79,7 +81,7 @@
           <li>Gráfico com médias diárias dos últimos 30 dias</li>
         </ul>
 
-        <h3>🎯 Objetivos didáticos e práticos</h3>
+        <h3>&#127919; Objetivos didáticos e práticos</h3>
         <p>Este projeto foi criado com fins educacionais e experimentais, sendo ideal para:</p>
         <ul>
           <li>Aulas de <strong>robótica</strong>, <strong>IoT</strong> e <strong>programação embarcada</strong></li>
@@ -87,7 +89,7 @@
           <li>Desenvolvimento de habilidades em <strong>web development</strong> e <strong>banco de dados em nuvem</strong></li>
         </ul>
 
-        <h3>🌐 Tecnologias integradas</h3>
+        <h3>&#127760; Tecnologias integradas</h3>
         <p>A estrutura combina hardware físico, transmissão de dados via Wi-Fi, armazenamento em nuvem e visualização em tempo real, criando um sistema completo, portátil e personalizável de monitoramento meteorológico.</p>
       </div>
     </div>
