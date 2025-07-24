@@ -6,6 +6,9 @@ const supabase = createClient(
 )
 
 async function run() {
+  const agora = new Date().toISOString()
+  console.log(`⏰ Iniciando agregação às: ${agora}`)
+
   const { error } = await supabase.rpc('agregar_hora')
   if (error) {
     console.error('Erro ao agregar por hora:', error)
