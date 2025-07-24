@@ -1,0 +1,23 @@
+name: Agregar por Dia
+
+on:
+  schedule:
+    - cron: '30 3 * * *'  # Todos os dias às 03:30
+  workflow_dispatch:
+
+jobs:
+  agregar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - run: npm install
+
+      - name: Executar agregador_dia.js
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: node agregador_dia.js
