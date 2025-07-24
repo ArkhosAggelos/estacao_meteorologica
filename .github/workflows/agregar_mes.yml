@@ -1,0 +1,23 @@
+name: Agregar por Mês
+
+on:
+  schedule:
+    - cron: '35 3 1 * *'  # Dia 1 de cada mês às 03:35
+  workflow_dispatch:
+
+jobs:
+  agregar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - run: npm install
+
+      - name: Executar agregador_mes.js
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: node agregador_mes.js
