@@ -94,7 +94,10 @@ function carregarGraficoDia() {
     .then(data => {
       data.reverse(); // garantir ordem cronológica
 
-      const labels = data.map(d => d.id.slice(0, 10));
+      const labels = data.map(d => {
+        const [ano, mes, dia] = d.id.slice(0, 10).split("-");
+        return `${dia}/${mes}/${ano}`;
+      });
       const temperatura = data.map(d => d.temperatura_avg);
       const umidade = data.map(d => d.umidade_avg);
       const pressao = data.map(d => d.pressao_avg);
