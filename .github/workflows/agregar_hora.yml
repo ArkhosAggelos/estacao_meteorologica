@@ -1,0 +1,27 @@
+name: Agregar por Hora
+
+on:
+  schedule:
+    - cron: '5 * * * *'  # A cada hora, no minuto 05
+  workflow_dispatch:
+
+jobs:
+  agregar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Executar agregador_hora.js
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: node agregador_hora.js
