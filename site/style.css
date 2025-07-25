@@ -24,7 +24,7 @@ body {
 
 .tabs {
   display: flex;
-  gap: 5px;
+  gap: -5px;
   margin-bottom: 20px;
   border-bottom: 2px solid #ccc;
 }
