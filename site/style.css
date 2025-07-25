@@ -48,7 +48,7 @@ body {
 }
 
 .tabs button.ativo {
-  background: white;
+  background: rgb(50,90,200);
   border-bottom: 2px solid white;
   z-index: 1;
 }
