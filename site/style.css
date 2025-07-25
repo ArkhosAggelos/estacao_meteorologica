@@ -7,6 +7,10 @@ body {
 }
 
 header {
+  
+}
+
+.cabecalho {
   background: rgb(50,90,200);
   color: white;
   padding: 20px;
