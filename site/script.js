@@ -73,7 +73,7 @@ function carregarGraficosTempoReal() {
             borderColor: "blue",
             backgroundColor: "rgba(0,0,255,0.9)",
             fill: true,
-            tension: 0.3
+            tension: 0.1
           }]
         },
         options: { responsive: true }
