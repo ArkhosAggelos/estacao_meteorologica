@@ -136,16 +136,27 @@ function carregarGraficoHora() {
             data: temperatura, 
             borderColor: "blue", 
             backgroundColor: "rgba(0,0,255,0.1)",
-            fill: true,tension: 0.3 
-           }] 
-         },
-         options: { responsive: true }
+            fill: true,
+            tension: 0.3 
+          }] 
+        },
+        options: { responsive: true }
       });
 
       if (chartHoraUmidade) chartHoraUmidade.destroy();
       chartHoraUmidade = new Chart(document.getElementById("grafico-hora-umidade"), {
         type: "line",
-        data: { labels, datasets: [{ label: "Umidade (%)", data: umidade, borderColor: "cyan", fill: false }] },
+        data: { 
+          labels, 
+          datasets: [{ 
+            label: "Umidade (%)", 
+            data: umidade, 
+            borderColor: "cyan", 
+            backgroundColor: "rgba(0,255,255,0.1)",
+            fill: true,
+            tension: 0.3 
+          }] 
+        },
         options: { responsive: true }
       });
 
@@ -159,7 +170,17 @@ function carregarGraficoHora() {
       if (chartHoraLux) chartHoraLux.destroy();
       chartHoraLux = new Chart(document.getElementById("grafico-hora-lux"), {
         type: "line",
-        data: { labels, datasets: [{ label: "Luminosidade (lx)", data: lux, borderColor: "orange", fill: false }] },
+        data: { 
+          labels, 
+          datasets: [{ 
+            label: "Luminosidade (lx)", 
+            data: lux, 
+            borderColor: "orange", 
+            backgroundColor: "rgba(255,165,0,0.1)",
+            fill: true,
+            tension: 0.3
+          }]
+        },
         options: { responsive: true }
       });
     });
@@ -182,14 +203,34 @@ function carregarGraficoDia() {
       if (chartDiaTemp) chartDiaTemp.destroy();
       chartDiaTemp = new Chart(document.getElementById("grafico-dia-temperatura"), {
         type: "line",
-        data: { labels, datasets: [{ label: "Temperatura (°C)", data: temperatura, borderColor: "blue", fill: false }] },
+        data: { 
+          labels, 
+          datasets: [{ 
+            label: "Temperatura (°C)", 
+            data: temperatura, 
+            borderColor: "blue", 
+            backgroundColor: "rgba(0,0,255,0.1)",
+            fill: true,
+            tension: 0.3 
+          }] 
+        },
         options: { responsive: true }
       });
 
       if (chartDiaUmidade) chartDiaUmidade.destroy();
       chartDiaUmidade = new Chart(document.getElementById("grafico-dia-umidade"), {
         type: "line",
-        data: { labels, datasets: [{ label: "Umidade (%)", data: umidade, borderColor: "cyan", fill: false }] },
+        data: { 
+          labels, 
+          datasets: [{ 
+            label: "Umidade (%)", 
+            data: umidade, 
+            borderColor: "cyan", 
+            backgroundColor: "rgba(0,255,255,0.1)",
+            fill: true,
+            tension: 0.3 
+          }] 
+        },
         options: { responsive: true }
       });
 
@@ -203,7 +244,17 @@ function carregarGraficoDia() {
       if (chartDiaLux) chartDiaLux.destroy();
       chartDiaLux = new Chart(document.getElementById("grafico-dia-lux"), {
         type: "line",
-        data: { labels, datasets: [{ label: "Luminosidade (lx)", data: lux, borderColor: "orange", fill: false }] },
+        data: { 
+          labels, 
+          datasets: [{ 
+            label: "Luminosidade (lx)", 
+            data: lux, 
+            borderColor: "orange", 
+            backgroundColor: "rgba(255,165,0,0.1)",
+            fill: true,
+            tension: 0.3
+          }]
+        },
         options: { responsive: true }
       });
     });
