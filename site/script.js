@@ -71,9 +71,9 @@ function carregarGraficosTempoReal() {
             label: "Temperatura (°C)",
             data: temperatura,
             borderColor: "blue",
-            backgroundColor: "rgba(0,0,255,0.3)",
+            backgroundColor: "rgba(0,0,255,0.1)",
             fill: true,
-            tension: 0.1
+            tension: 0.3
           }]
         },
         options: { responsive: true }
@@ -129,8 +129,17 @@ function carregarGraficoHora() {
       if (chartHoraTemp) chartHoraTemp.destroy();
       chartHoraTemp = new Chart(document.getElementById("grafico-hora-temperatura"), {
         type: "line",
-        data: { labels, datasets: [{ label: "Temperatura (°C)", data: temperatura, borderColor: "blue", fill: false }] },
-        options: { responsive: true }
+        data: { 
+          labels, 
+          datasets: [{ 
+            label: "Temperatura (°C)", 
+            data: temperatura, 
+            borderColor: "blue", 
+            backgroundColor: "rgba(0,0,255,0.1)",
+            fill: true,tension: 0.3 
+           }] 
+         },
+         options: { responsive: true }
       });
 
       if (chartHoraUmidade) chartHoraUmidade.destroy();
