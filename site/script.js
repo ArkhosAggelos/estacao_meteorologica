@@ -44,7 +44,7 @@ function carregarTempoReal() {
             <p><span class="card-icon">&#128167;</span><strong>${d.umidade} %</strong></p>
             <p><span class="card-icon">&#127744;</span><strong>${d.pressao} hPa</strong></p>
             <p><span class="card-icon">&#128161;</span><strong>${d.lux} lx</strong></p>
-            <p><span class="card-icon">&#127781;</span><strong>${d.previsao}</strong></p>
+            <p><span class="card-icon">&#127781;</span><strong></strong></p>
             <p><span class="card-icon">&#128339;</span><strong>${new Date(d.id).toLocaleString("pt-BR")}</strong></p>
           </div>`;
       }
